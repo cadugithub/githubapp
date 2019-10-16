@@ -15,13 +15,18 @@ class App extends Component
             starred: []
         }
     }
+    getGitHubApiUrl(username, type){
+        const internalUser = username ? `/${username}`: '';
+        const internalType = type ? `/${type}`: '';
+        return `https://api.github.com/users${internalUser}${internalType}`
+    }
     handleSeach(e){
             const value = e.target.value;
             const keyCode = e.which || e.keyCode
             const ENTER = 13
 
             if(keyCode === ENTER){
-                ajax().get(`https://api.github.com/users/${value}`).then(
+                ajax().get(this.getGitHubApiUrl(value)).then(
                     (result)=>{
                         this.setState(
                             {
@@ -33,6 +38,8 @@ class App extends Component
                                     followers: result.followers,
                                     following: result.following
                             },
+                            repos:[],
+                            starred:[]
                             
                         })
                         
@@ -42,7 +49,8 @@ class App extends Component
     }
     getRepos(type){
         return (e)=>{
-            ajax().get(`https://api.github.com/users/${this.state.userinfo.login}/${type}`).then(
+            const username = this.state.userinfo.login
+            ajax().get(this.getGitHubApiUrl(username,type)).then(
                     (result)=>{
                         this.setState({
                             [type]: result.map((repo)=>({
