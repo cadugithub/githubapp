@@ -1,6 +1,6 @@
 'use strict'
 
-import React,{PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 
 const Search = ({ isDisabled, handleSeach }) =>(
@@ -11,7 +11,8 @@ const Search = ({ isDisabled, handleSeach }) =>(
             disabled={isDisabled}/>
         </div>
 )
-export default Search;
 Search.propTypes = {
     handleSeach: PropTypes.func.isRequired,
+    isDisabled: PropTypes.bool.isRequired
 }
+export default Search;
