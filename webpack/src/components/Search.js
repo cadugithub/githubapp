@@ -3,11 +3,12 @@
 import React,{PropTypes} from 'react'
 
 
-const Search = ({ handleSeach }) =>(
+const Search = ({ isDisabled, handleSeach }) =>(
         <div className='search'>
             <input type='search' 
             placeholder='Digite o nome do usuário no github'
-            onKeyUp={handleSeach}/>
+            onKeyUp={handleSeach}
+            disabled={isDisabled}/>
         </div>
 )
 export default Search;
