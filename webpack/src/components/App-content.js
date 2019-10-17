@@ -6,9 +6,10 @@ import UserInfo from './UserInfo';
 import Actions from './Actions';
 import Repos from './Repos'
 
-const AppContent = ({ userinfo, repos,  starred, handleSeach, getRepos, getStarred}) =>(
+const AppContent = ({ userinfo, repos,  starred, isFetching, handleSeach, getRepos, getStarred}) =>(
     <div className='container'>
-                <Search handleSeach={handleSeach}/>
+                <Search isDisabled={isFetching} handleSeach={handleSeach}/>
+                {isFetching && <div>Carregando...</div>}
                 {!!userinfo && <UserInfo userinfo={userinfo}/>}
                 {!!userinfo && <Actions getRepos={getRepos} getStarred={getStarred}/>}
                 
